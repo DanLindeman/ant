@@ -1,4 +1,5 @@
-
+import math
+from random import randint
 
 class Ant(object):
     """Class to represent a single Ant
@@ -18,6 +19,12 @@ class Ant(object):
         self.thickness = 0 # indicated ants are filled in
 
     def move(self):
-        print self.x, self.y
-
-
+        """Update position based on speed and angle
+        """
+        self.x += math.sin(self.angle) * self.speed
+        self.y -= math.cos(self.angle) * self.speed
+        random_selector = randint(0, 40)
+        if random_selector == randint(0, 40):
+            self.angle += 5
+        if random_selector == randint(0, 40):
+            self.angle -= 5
