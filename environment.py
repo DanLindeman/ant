@@ -20,23 +20,24 @@ class Environment:
         """  Moves ants """
         for i, ant in enumerate(self.ants):
             ant.move()
-            self.keep_ant_in_bounds(ant)
+            ant.change_direction_randomly()
+            self.keep_in_bounds(ant)
 
-    def keep_ant_in_bounds(self, ant):
+    def keep_in_bounds(self, obj):
         """ Corrects angle if ant has hit environment boundary"""
 
-        if ant.x > self.width - ant.size:
-            ant.x = 2*(self.width - ant.size) - ant.x
-            ant.angle = - ant.angle
+        if obj.x > self.width - obj.size:
+            obj.x = 2*(self.width - obj.size) - obj.x
+            obj.angle = - obj.angle
 
-        elif ant.x < ant.size:
-            ant.x = 2*ant.size - ant.x
-            ant.angle = - ant.angle
+        elif obj.x < obj.size:
+            obj.x = 2*obj.size - obj.x
+            obj.angle = - obj.angle
 
-        if ant.y > self.height - ant.size:
-            ant.y = 2*(self.height - ant.size) - ant.y
-            ant.angle = math.pi - ant.angle
+        if obj.y > self.height - obj.size:
+            obj.y = 2*(self.height - obj.size) - obj.y
+            obj.angle = math.pi - obj.angle
 
-        elif ant.y < ant.size:
-            ant.y = 2*ant.size - ant.y
-            ant.angle = math.pi - ant.angle
+        elif obj.y < obj.size:
+            obj.y = 2*obj.size - obj.y
+            obj.angle = math.pi - obj.angle
