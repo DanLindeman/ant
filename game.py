@@ -15,17 +15,23 @@ class Game(object):
 
     def add_ants(self, number_of_ants):
         for x in range(number_of_ants):
-            self.env.add_ant(x=randint(0,self.env.width), y=randint(0, self.env.height), speed=4, angle=randint(0, 360), awareness_radius=300)
+            self.env.add_ant(x=50, y=50, speed=3, angle=randint(0, 360), awareness_radius=300)
+
+    def handle_event(self, event):
+        running = True
+        if event.type == pygame.QUIT:
+            running = False
+        elif (event.type == pygame.MOUSEBUTTONDOWN) or (event.type == pygame.KEYDOWN):
+            if (event.type == pygame.MOUSEBUTTONDOWN):
+                print("MOUSE")
+                print event
+        return running
 
     def run_game(self):
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                elif (event.type == pygame.MOUSEBUTTONDOWN) or (event.type == pygame.KEYDOWN):
-                    if (event.type == pygame.MOUSEBUTTONDOWN):
-                        print "MOUSE"
+                running = self.handle_event(event)
             self.env.update()
             self.screen.fill(self.env.color)
 
