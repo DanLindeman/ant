@@ -1,13 +1,12 @@
 import math
-from random import randint
+from random import randint, choice
+from actor import Actor
 
-class Ant(object):
+class Ant(Actor):
     """Class to represent a single Ant
     """
 
     def __init__(self, x, y, speed, angle, awareness_radius):
-        """
-        """
         self.x = x
         self.y = y
         self.angle = angle
@@ -23,8 +22,12 @@ class Ant(object):
         """
         self.x += math.sin(self.angle) * self.speed
         self.y -= math.cos(self.angle) * self.speed
-        random_selector = randint(0, 40)
-        if random_selector == randint(0, 40):
-            self.angle += 5
-        if random_selector == randint(0, 40):
-            self.angle -= 5
+
+    def change_direction_randomly(self):
+        if randint(0, 40) == randint(0, 40):
+            self.angle += choice([-1, 1])
+
+    def seek(self):
+        dx = x - self.x
+        dy = y - self.y
+        self.angle = 0.5 * math.pi + math.atan2(dy, dx)
